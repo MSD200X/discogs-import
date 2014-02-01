@@ -17,20 +17,22 @@
 import xml.sax.handler
 import xml.sax
 import sys
-import jsonexporter
 import argparse # in < 2.7 pip install argparse
 from os import path
-from model import ParserStopError
 from collections import deque
+
+from discogs_import.model import ParserStopError
+# import discogs_import.jsonexporter
 
 #sys.setdefaultencoding('utf-8')
 options = None
 
-exporters = { 'json': 'jsonexporter.JsonConsoleExporter', 
-	'pgsql' : 'postgresexporter.PostgresExporter', 
-	'pgdump': 'postgresexporter.PostgresConsoleDumper',
-	'couch' : 'couchdbexporter.CouchDbExporter',
-	'mongo' : 'mongodbexporter.MongoDbExporter',
+exporters = { 
+    'json'  : 'discogs_import.jsonexporter.JsonConsoleExporter', 
+	'pgsql' : 'discogs_import.postgresexporter.PostgresExporter', 
+	'pgdump': 'discogs_import.postgresexporter.PostgresConsoleDumper',
+	'couch' : 'discogs_import.couchdbexporter.CouchDbExporter',
+	'mongo' : 'discogs_import.mongodbexporter.MongoDbExporter',
 	}
 
 # http://www.discogs.com/help/voting-guidelines.html
@@ -66,7 +68,8 @@ def parseArtists(parser, exporter):
 		#print "File %s doesn't exist:" % artist_file
 		return
 
-	from discogsartistparser import ArtistHandler
+#     from discogsartistparser import ArtistHandler
+	from discogs_import.artist import ArtistHandler
 	artistHandler = ArtistHandler(exporter, stop_after=options.n, ignore_missing_tags = options.ignore_unknown_tags)
 	parser.setContentHandler(artistHandler)
 	try:
@@ -96,7 +99,8 @@ def parseLabels(parser, exporter):
 		#print "File %s doesn't exist:" % label_file
 		return
 
-	from discogslabelparser import LabelHandler
+#     from discogslabelparser import LabelHandler
+	from discogs_import.label import LabelHandler
 	labelHandler = LabelHandler(exporter, stop_after=options.n, ignore_missing_tags = options.ignore_unknown_tags)
 	parser.setContentHandler(labelHandler)
 	try:
@@ -121,7 +125,8 @@ def parseReleases(parser, exporter):
 		#print "File %s doesn't exist:" % release_file
 		return
 
-	from discogsreleaseparser import ReleaseHandler
+#     from discogsreleaseparser import ReleaseHandler
+	from discogs_import.release import ReleaseHandler
 	releaseHandler = ReleaseHandler(exporter, stop_after=options.n, ignore_missing_tags = options.ignore_unknown_tags)
 	parser.setContentHandler(releaseHandler)
 	try:
@@ -146,7 +151,8 @@ def parseMasters(parser, exporter):
 		#print "File %s doesn't exist:" % master_file
 		return
 
-	from discogsmasterparser import MasterHandler
+#     from discogsmasterparser import MasterHandler
+	from discogs_import.master import MasterHandler
 	masterHandler = MasterHandler(exporter, stop_after=options.n, ignore_missing_tags = options.ignore_unknown_tags)
 	parser.setContentHandler(masterHandler)
 	try:
