@@ -28,11 +28,11 @@ from discogs_import.model import ParserStopError
 options = None
 
 exporters = { 
-    'json'  : 'discogs_import.jsonexporter.JsonConsoleExporter', 
-	'pgsql' : 'discogs_import.postgresexporter.PostgresExporter', 
-	'pgdump': 'discogs_import.postgresexporter.PostgresConsoleDumper',
-	'couch' : 'discogs_import.couchdbexporter.CouchDbExporter',
-	'mongo' : 'discogs_import.mongodbexporter.MongoDbExporter',
+    'json'  : 'discogs_import.export_json.JsonConsoleExporter', 
+	'pgsql' : 'discogs_import.export_postgres.PostgresExporter', 
+	'pgdump': 'discogs_import.export_postgres.PostgresConsoleDumper',
+	'couch' : 'discogs_import.export_couchdb.CouchDbExporter',
+	'mongo' : 'discogs_import.export_mongodb.MongoDbExporter',
 	}
 
 # http://www.discogs.com/help/voting-guidelines.html
