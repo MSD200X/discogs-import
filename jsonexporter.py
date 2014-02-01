@@ -1,4 +1,7 @@
-import json
+try:
+    import ujson as json
+except:
+    import json
 
 def jsonizer(obj, specify_object_type = True):
 	'''Assists in serializing models to JSON.
@@ -32,7 +35,7 @@ class JsonConsoleExporter:
 		pass
 	
 	def _store(self, what):
-		return json.dumps(what, default=jsonizer)
+		return json.dumps(what)
 
 	def storeArtist(self, artist):
 		self.dump(artist)
