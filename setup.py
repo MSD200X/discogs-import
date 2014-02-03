@@ -11,6 +11,7 @@ setup(
     long_description="""\
     A fork of discogs import/export scripts
     """,
+    packages=['discogs_import'],
     scripts=['parse_discogs.py'],
     classifiers=[
           "License :: OSI Approved :: GNU General Public License (GPL)",
@@ -19,11 +20,8 @@ setup(
           "Intended Audience :: Developers",
           "Topic :: Multimedia :: Text Processing :: Markup",
     ],
-    keywords='web template',
+    keywords='web xml discography database',
     license='GPL',
-    install_requires=[
-        'json',
-    ],
     extras_require = {
         'ujson': 'ujson',
         'couchdb': 'couchdb',
