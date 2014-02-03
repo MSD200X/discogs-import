@@ -1,11 +1,15 @@
 from datetime import date
 from hashlib import md5
-from jsonexporter import jsonizer as _jsonizer
-import json
+from export_json import jsonizer as _jsonizer
+
 import os
 import pymongo
 import urlparse
 
+try:
+    import ujson as json
+except:
+    import json
 
 def jsonizer(obj):
 	return _jsonizer(obj, specify_object_type=False)

@@ -1,7 +1,10 @@
 import couchdb
 import urlparse
-from jsonexporter import jsonizer
-import json
+from export_json import jsonizer
+try:
+    import ujson as json
+except:
+    import json
 
 
 class CouchDbExporter(object):
