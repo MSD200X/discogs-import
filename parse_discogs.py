@@ -208,7 +208,7 @@ that --params is used, e.g.:
     opt_parser.add_argument('-p', '--params', help='Parameters for output, e.g. connection string')
     opt_parser.add_argument('-i', '--ignore-unknown-tags', action='store_true', dest='ignore_unknown_tags', help='Do not error out when encountering unknown tags')
     opt_parser.add_argument('-q', '--quality', choices=data_quality_values, nargs='+', dest='data_quality', help='One or more permissable data_quality values.')
-    opt_parser.add_argument('file', nargs='*', help='Specific file(s) to import. Default is to parse artists, labels, releases matching -d')
+    opt_parser.add_argument('file', nargs='+', help='Specific file(s) to import. Default is to parse artists, labels, releases matching -d')
     global options
     options = opt_parser.parse_args(argv)
     print(options)
