@@ -16,7 +16,7 @@ discogs-xml2db makes use of the following modules (some are standard in 2.7, som
 * psycopg2 - for the PostgreSQL back-end (not your best option)
 
 
-# Options for `discogsparser.py`
+# Options for `parse_discogs.py`
 
 * **Input**: `-d`/`--date` parses all three files (artists, labels, masters, releases) for a given monthly dump:
     * `discogsparser.py -d 20111101` will look for `discogs_20111101_artists.xml`, `discogs_20111101_labels.xml`, `discogs_20111101_masters.xml`, and `discogs_20111101_releases.xml` in the current directory;
