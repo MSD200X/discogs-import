@@ -12,7 +12,12 @@ setup(
     A fork of discogs import/export scripts
     """,
     packages=['discogs_import'],
-    scripts=['parse_discogs.py'],
+    scripts=[   'parse_discogs.py',
+                'tools/discogs-import-fix-xml.py',
+                'tools/discogs-import-get_latest_dumps.sh',
+                'tools/discogs-import-make_artist_name_id_pair.py',
+                'tools/discogs-import-make_md5.py'
+    ],
     classifiers=[
           "License :: OSI Approved :: GNU General Public License (GPL)",
           "Programming Language :: Python",
