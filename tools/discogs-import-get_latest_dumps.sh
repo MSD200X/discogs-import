@@ -13,6 +13,13 @@ for f in `wget -c --user-agent="$USER_AGENT" --header="$ACCEPT" -qO- $D_URL | se
 	echo $D_URL$f >> $D_TMP
 done
 
-wget -c --user-agent="$USER_AGENT" --header="$ACCEPT" --no-clobber --input-file=$D_TMP $TEST --append-output=$D_TMP.log 
+wget    --continue \
+        --verbose \
+        --user-agent="$USER_AGENT" \
+        --header="$ACCEPT" \
+        --no-clobber \
+        --input-file=$D_TMP \
+        $TEST \
+        --append-output=$D_TMP.log 
 
 
