@@ -203,7 +203,8 @@ class MongoDbExporter(object):
 		# TypeError: argument of type 'instance' is not iterable
 		# and on dicts:
 		# AttributeError: 'dict' object has no attribute 'read'
-		json_string = json.dumps(what, default=jsonizer)
+#         json_string = json.dumps(what, default=jsonizer)
+		json_string = json.dumps(what)#, default=jsonizer)
 		uniq, md5 = self._is_uniq(collection, what.id, json_string)
 		if uniq:
 			doc = json.loads(json_string)

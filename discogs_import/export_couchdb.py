@@ -35,7 +35,8 @@ class CouchDbExporter(object):
 		# TypeError: argument of type 'instance' is not iterable
 		# and on dicts:
 		# AttributeError: 'dict' object has no attribute 'read'
-		doc = json.loads(json.dumps(what, default=jsonizer))
+#         doc = json.loads(json.dumps(what, default=jsonizer))
+		doc = json.loads(json.dumps(what))#, default=jsonizer))
 		self.db.save(doc)
 	
 
