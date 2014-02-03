@@ -40,9 +40,9 @@ discogs-xml2db makes use of the following modules (some are standard in 2.7, som
 
 # Examples:
 
-    discogsparser.py -n 200 -o couch --params http://127.0.0.1:5984/discogs -d 20111101
-    discogsparser.py -o mongo -p mongodb://localhost,remote1/discogs discogs_20111101_artists.xml discogs_20111101_releases.xml
-    discogsparser.py -o pgsql -p "host=remote1 dbname=discogs user=postgres password=s3cret" discogs_20111101_artists.xml
+    parse_discogs.py -n 200 -o couch --params http://127.0.0.1:5984/discogs -d 20111101
+    parse_discogs.py -o mongo -p mongodb://localhost,remote1/discogs discogs_20111101_artists.xml discogs_20111101_releases.xml
+    parse_discogs.py -o pgsql -p "host=remote1 dbname=discogs user=postgres password=s3cret" discogs_20111101_artists.xml
 
 
 # How do I use it?
@@ -53,7 +53,7 @@ Steps to import the data-dumps into PostgreSQL:
 1. Create the empty database: `createdb -U {user-name} discogs`
 2. Import the database schema: `psql -U {user-name} -d discogs -f discogs.sql`
 3. The XML data dumps often contain control characters and do not have root tags. To fix this run `fix-xml.py _release_`, where release is the release date of the dump, for example `20100201`.
-4. Finally import the data with `python discogsparser.py -o pgsql -p "dbname=discogs" pgsql _release_`, where release is the release date of the dump, for example `20100201`
+4. Finally import the data with `python parse_discogs.py -o pgsql -p "dbname=discogs" pgsql _release_`, where release is the release date of the dump, for example `20100201`
 
 To import data into MongoDB you have two choices: direct import or dumping the records to JSON and then using `mongoimport`. The latter is considerably faster, particularly for the initial import.
 
@@ -64,13 +64,13 @@ The mongo parser will store MD5 hashes of all records it parsed and it can re-us
 
 To perform a direct import:
 
-    discogsparser.py -i -o mongo -p "mongodb://localhost/discogs?uniq=md5" -d 20111101 
+    parse_discogs.py -i -o mongo -p "mongodb://localhost/discogs?uniq=md5" -d 20111101 
 
 
 The JSON dump route requires that you specify a `file://` scheme and a location where the intermediate files are to be stored 
 (you'll need space - these files are about the same size as the original XMLs):
 
-    $ discogsparser.py -i -o mongo -p "file:///tmp/discogs/?uniq=md5" -d 20111101 
+    $ parse_discogs.py -i -o mongo -p "file:///tmp/discogs/?uniq=md5" -d 20111101 
     # this results in 2 files creates for each class, e.g. an artists.json file and an artists.md5 file
 
     $ mongoimport -d discogs -c artists --ignoreBlanks artists.json
